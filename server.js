@@ -29,6 +29,10 @@ app.get('/', (req, res) => {
 // Actual Routes
 
 app.use('/api', routes);
+app.use((error, req, res, next) => {
+    console.log("Error middleware");
+    res.status(error.statusCode).json({ error: error.message });
+})
 
 
 moongose.connect(dbUrl, { useNewUrlParser: true })

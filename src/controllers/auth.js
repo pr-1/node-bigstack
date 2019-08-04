@@ -4,24 +4,32 @@ const jwt = require('jsonwebtoken');
 const Person = require('../models/person');
 const key = require('../setup/db').secret;
 
-const createUser = (req, res) => {
+const createUser = (req, res, next) => {
+    let errMsg;
+    if (!req.body.name) {
+        errMsg = 'Name filed is required.';
+    }
+    if (!req.body.email) {
+        errMsg = 'Email filed is required.';
+    }
+
+    if (!req.body.password) {
+        errMsg = 'Password filed is required.';
+    }
+    if (errMsg) {
+        const error = new Error(errMsg);
+        error.statusCode = 400;
+        throw error;
+    }
+
     Person.findOne({ email: req.body.email })
         .then((person) => {
             if (person) {
-                res.status(400).json({ error: 'User already exists!' });
+                const error = new Error('User already exists!');
+                error.statusCode = 400;
+                throw error;
             }
             else {
-                if (!req.body.name) {
-                    res.status(400).json({ error: 'Name field is required!' });
-                }
-                if (!req.body.email) {
-                    res.status(400).json({ error: 'Email field is required!' });
-                }
-
-                if (!req.body.password) {
-                    res.status(400).json({ error: 'Password field is required!' });
-                }
-
                 const newPerson = new Person({
                     name: req.body.name,
                     email: req.body.email,
@@ -41,27 +49,37 @@ const createUser = (req, res) => {
                 });
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log("Error occured!")
+            next(err);
+        });
 
 }
 
-const login = (req, res) => {
+const login = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     let person;
+    let errMsg;
     if (!email) {
-        res.status(400).json({ error: 'Email field is required!' });
+        errMsg = 'Email field is required!';
     }
-
     if (!password) {
-        res.status(400).json({ error: 'Password field is required!' });
+        errMsg = 'Password field is required!';
+    }
+    if (errMsg) {
+        const err = new Error(errMsg);
+        err.statusCode = 400;
+        throw error;
     }
 
     Person.findOne({ email })
         .then(p => {
             person = p;
             if (!p) {
-                res.status(401).json({ error: 'User not found!' });
+                const error = new Error('User not found!');
+                error.statusCode = 400;
+                throw error;
             }
             else {
                 return bcrypt.compare(password, p.password);
@@ -69,7 +87,9 @@ const login = (req, res) => {
         })
         .then(r => {
             if (!r) {
-                res.status(401).json({ error: 'Incorrect password!' });
+                const error = new Error('Incorrect Password!');
+                error.statusCode = 400;
+                throw error;
             } else {
                 const token = jwt.sign(
                     { email: person.email, name: person.name, id: person._id },
@@ -83,7 +103,10 @@ const login = (req, res) => {
                 });
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log('Error occuures');
+            next(err);
+        });
 }
 
 const getProfile = (req, res) => {
