@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Person = require('../models/person');
+const key = require('../setup/db').secret;
 
 const createUser = (req, res) => {
     Person.findOne({ email: req.body.email })
@@ -44,4 +45,45 @@ const createUser = (req, res) => {
 
 }
 
-module.exports = { createUser };
+const login = (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    let person;
+    if (!email) {
+        res.status(400).json({ error: 'Email field is required!' });
+    }
+
+    if (!password) {
+        res.status(400).json({ error: 'Password field is required!' });
+    }
+
+    Person.findOne({ email })
+        .then(p => {
+            person = p;
+            if (!p) {
+                res.status(401).json({ error: 'User not found!' });
+            }
+            else {
+                return bcrypt.compare(password, p.password);
+            }
+        })
+        .then(r => {
+            if (!r) {
+                res.status(401).json({ error: 'Incorrect password!' });
+            } else {
+                const token = jwt.sign(
+                    { email: person.email, mame: person.name },
+                    key
+                );
+                res.status(201).json({
+                    email: person.email,
+                    name: person.name,
+                    profilePic: person.profilePic,
+                    token
+                });
+            }
+        })
+        .catch(err => console.log(err));
+}
+
+module.exports = { createUser, login };
