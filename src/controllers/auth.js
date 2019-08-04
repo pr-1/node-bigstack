@@ -72,18 +72,26 @@ const login = (req, res) => {
                 res.status(401).json({ error: 'Incorrect password!' });
             } else {
                 const token = jwt.sign(
-                    { email: person.email, mame: person.name },
+                    { email: person.email, name: person.name, id: person._id },
                     key
                 );
                 res.status(201).json({
                     email: person.email,
                     name: person.name,
                     profilePic: person.profilePic,
-                    token
+                    token: 'Bearer ' + token
                 });
             }
         })
         .catch(err => console.log(err));
 }
 
-module.exports = { createUser, login };
+const getProfile = (req, res) => {
+    res.json({
+        email: req.user.email,
+        name: req.user.name,
+        profileUrl: req.user.profilePic
+    })
+}
+
+module.exports = { createUser, login, getProfile };
