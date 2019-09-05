@@ -6,21 +6,21 @@ const key = require('../setup/db').secret;
 
 const createUser = (req, res, next) => {
     let errMsg;
-    if (!req.body.name) {
-        errMsg = 'Name filed is required.';
-    }
-    if (!req.body.email) {
-        errMsg = 'Email filed is required.';
-    }
+    // if (!req.body.name) {
+    //     errMsg = 'Name filed is required.';
+    // }
+    // if (!req.body.email) {
+    //     errMsg = 'Email filed is required.';
+    // }
 
-    if (!req.body.password) {
-        errMsg = 'Password filed is required.';
-    }
-    if (errMsg) {
-        const error = new Error(errMsg);
-        error.statusCode = 400;
-        throw error;
-    }
+    // if (!req.body.password) {
+    //     errMsg = 'Password filed is required.';
+    // }
+    // if (errMsg) {
+    //     const error = new Error(errMsg);
+    //     error.statusCode = 400;
+    //     throw error;
+    // }
 
     Person.findOne({ email: req.body.email })
         .then((person) => {
@@ -43,7 +43,7 @@ const createUser = (req, res, next) => {
                             newPerson.password = hash;
                             newPerson.save().then((person) => {
                                 res.json(person)
-                            }).catch(err => console.log(err));
+                            }).catch(err => next(err));
                         }
                     });
                 });
@@ -70,7 +70,7 @@ const login = (req, res, next) => {
     if (errMsg) {
         const err = new Error(errMsg);
         err.statusCode = 400;
-        throw error;
+        next(err);
     }
 
     Person.findOne({ email })

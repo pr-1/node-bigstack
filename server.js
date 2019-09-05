@@ -31,7 +31,11 @@ app.get('/', (req, res) => {
 app.use('/api', routes);
 app.use((error, req, res, next) => {
     console.log("Error middleware");
-    res.status(error.statusCode).json({ error: error.message });
+    let statusCode = error.statusCode;
+    if (!statusCode) {
+        statusCode = 500;
+    }
+    res.status(statusCode).json({ error: error.message });
 })
 
 
