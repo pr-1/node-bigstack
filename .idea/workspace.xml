@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="79876b0b-594a-411a-928a-af672fbe1e75" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="79876b0b-594a-411a-928a-af672fbe1e75" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -124,6 +122,7 @@
       <list>
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/src/controllers/auth.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -229,12 +228,12 @@
       <workItem from="1562220396848" duration="2000" />
       <workItem from="1562819231651" duration="563000" />
       <workItem from="1564116796065" duration="679000" />
-      <workItem from="1568010265306" duration="586000" />
+      <workItem from="1568010265306" duration="838000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1963000" />
+    <option name="totallyTimeSpent" value="2215000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
