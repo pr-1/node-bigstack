@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="79876b0b-594a-411a-928a-af672fbe1e75" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/models/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/strategies/passport-jwt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategies/passport-jwt.js" afterDir="false" />
-    </list>
+    <list default="true" id="79876b0b-594a-411a-928a-af672fbe1e75" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -54,6 +49,7 @@
     <session id="815969249">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -111,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/src/controllers/profile.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -324,7 +320,7 @@
     <entry file="file://$PROJECT_DIR$/src/controllers/profile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
