@@ -5,7 +5,7 @@ const Person = require('../models/person');
 const key = require('../setup/db').secret;
 
 const createUser = (req, res, next) => {
-    Person.findOne({ email: req.body.email })
+    Person.findOne({email: req.body.email})
         .then((person) => {
             if (person) {
                 const error = new Error('User already exists!');
@@ -44,7 +44,7 @@ const login = (req, res, next) => {
     const password = req.body.password;
     let person;
 
-    Person.findOne({ email })
+    Person.findOne({email})
         .then(p => {
             person = p;
             if (!p) {
@@ -63,7 +63,7 @@ const login = (req, res, next) => {
                 throw error;
             } else {
                 const token = jwt.sign(
-                    { email: person.email, name: person.name, id: person._id },
+                    {email: person.email, name: person.name, id: person._id},
                     key
                 );
                 res.status(201).json({
@@ -88,4 +88,4 @@ const getProfile = (req, res) => {
     })
 }
 
-module.exports = { createUser, login, getProfile };
+module.exports = {createUser, login, getProfile};

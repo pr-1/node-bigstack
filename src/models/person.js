@@ -24,4 +24,12 @@ const PersonsSchema = new Schema({
     }
 });
 
+// Removing the password form user object
+
+PersonsSchema.methods.toJSON = function() {
+    const user = this.toObject();
+    delete user.password;
+    return user;
+}
+
 module.exports = Person = moongose.model('person', PersonsSchema);
