@@ -27,7 +27,7 @@ const updateProfile = (req, res, next) => {
         .then(profile => {
             if (profile) {
                 // Update the profile
-                console.log("1",profile);
+                console.log("1", profile);
                 Profile.findOneAndUpdate(
                     { user: req.user.id },
                     { $set: profile },
@@ -36,19 +36,10 @@ const updateProfile = (req, res, next) => {
                     .then(p => res.json(p))
                     .catch(err => next(err));
             } else {
-                // Check for the uniqueness of username
-                Profile.findOne({ username: req.body.username })
-                    .then(profile => {
-                        if (profile) {
-                            res.status(400).json({ message: "Username already exists" });
-                        } else {
-                            // Create a new user profile and save
-                            new Profile(profile)
-                                .save()
-                                .then(p => res.json({ status: "Profile updated sucessfully", profile: p }))
-                                .catch(err => next(err));
-                        }
-                    })
+                // Save the new user profile
+                new Profile(profile)
+                    .save()
+                    .then(p => res.json({ status: "Profile updated sucessfully", profile: p }))
                     .catch(err => next(err));
             }
         })

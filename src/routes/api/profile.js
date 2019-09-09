@@ -4,6 +4,7 @@ const passport = require('passport');
 const router = express.Router();
 
 const profileController = require('../../controllers/profile');
+const profileMiddleware = require('../../middlewares/profile');
 
 router.get('/', (req, res) => {
     res.json({ profile: 'success' });
@@ -13,6 +14,11 @@ router.get('/', (req, res) => {
 // @PATH: /api/profile
 // @DESC: update or create a user profile
 // @ACCESS: private
-router.post('/', passport.authenticate('jwt', { session: false }), profileController.updateProfile);
+router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    [profileMiddleware.verifyUsername],
+    profileController.updateProfile
+);
 
 module.exports = router;
