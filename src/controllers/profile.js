@@ -59,4 +59,16 @@ const getProfile = (req, res, next) => {
         });
 }
 
-module.exports = { updateProfile, getProfile };
+const getAllProfiles = (req, res, next) => {
+    Profile.find({})
+        .populate("user", ["name", "email", "profilePic"])
+        .then(profile => {
+            if (profile) {
+                res.json(profile);
+            } else {
+                res.status(404).json({ message: "Profiles not found" });
+            }
+        });
+}
+
+module.exports = { updateProfile, getProfile, getAllProfiles };

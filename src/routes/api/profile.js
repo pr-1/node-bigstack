@@ -6,10 +6,6 @@ const router = express.Router();
 const profileController = require('../../controllers/profile');
 const profileMiddleware = require('../../middlewares/profile');
 
-router.get('/', (req, res) => {
-    res.json({ profile: 'success' });
-});
-
 // @METHOD: POST
 // @PATH: /api/profile
 // @DESC: update or create a user profile
@@ -28,6 +24,15 @@ router.post(
 router.get(
     '/:username',
     profileController.getProfile
+);
+
+// @METHOD: GET
+// @PATH: /api/profile
+// @DESC: get all user profile
+// @ACCESS: public
+router.get(
+    '/',
+    profileController.getAllProfiles
 );
 
 module.exports = router;
