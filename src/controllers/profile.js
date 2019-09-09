@@ -57,7 +57,7 @@ const getProfile = (req, res, next) => {
                 res.status(404).json({ message: "Profile not found" });
             }
         });
-}
+};
 
 const getAllProfiles = (req, res, next) => {
     Profile.find({})
@@ -69,6 +69,48 @@ const getAllProfiles = (req, res, next) => {
                 res.status(404).json({ message: "Profiles not found" });
             }
         });
-}
+};
 
-module.exports = { updateProfile, getProfile, getAllProfiles };
+const addWorkrole = (req, res, next) => {
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+            const newWork = {
+                role: req.body.role,
+                company: req.body.company,
+                country: req.body.country,
+                from: req.body.from,
+                to: req.body.to,
+                current: req.body.current,
+                details: req.body.details
+            }
+            profile.workrole.unshift(newWork);
+            profile.save()
+                .then(profile => res.json(profile))
+                .catch(err => next(err));
+        })
+        .catch(err => next(err));
+};
+
+const deleteWorkrole = (req, res, next) => {
+    const workroleId = req.params.w_id;
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+            if (profile) {
+                profile.workrole = profile.workrole.filter(w => w.id != workroleId);
+                profile.save()
+                    .then(profile => res.json(profile))
+                    .catch(err => next(err));
+            } else {
+                res.status(404).json({ message: "Profile not found!" })
+            }
+        })
+        .catch(err => next(err));
+};
+
+module.exports = {
+    updateProfile,
+    getProfile,
+    getAllProfiles,
+    addWorkrole,
+    deleteWorkrole
+};

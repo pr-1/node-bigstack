@@ -17,6 +17,26 @@ router.post(
     profileController.updateProfile
 );
 
+// @METHOD: POST
+// @PATH: /api/profile/workrole
+// @DESC: add a workrole to user profile
+// @ACCESS: private
+router.post(
+    '/workrole',
+    passport.authenticate('jwt', { session: false }),
+    profileController.addWorkrole
+);
+
+// @METHOD: DELETE
+// @PATH: /api/profile/workrole/:w_id
+// @DESC: delete a workrole to user profile
+// @ACCESS: private
+router.delete(
+    '/workrole/:w_id',
+    passport.authenticate('jwt', { session: false }),
+    profileController.deleteWorkrole
+);
+
 // @METHOD: GET
 // @PATH: /api/profile/:username
 // @DESC: get the user profile
