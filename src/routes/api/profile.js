@@ -21,4 +21,13 @@ router.post(
     profileController.updateProfile
 );
 
+// @METHOD: GET
+// @PATH: /api/profile/:username
+// @DESC: get the user profile
+// @ACCESS: public
+router.get(
+    '/:username',
+    profileController.getProfile
+);
+
 module.exports = router;

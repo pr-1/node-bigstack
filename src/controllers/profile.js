@@ -46,4 +46,17 @@ const updateProfile = (req, res, next) => {
         .catch(err => next(err));
 }
 
-module.exports = { updateProfile };
+const getProfile = (req, res, next) => {
+    const username = req.params.username;
+    Profile.findOne({ username: username })
+        .populate('user', ['name', 'email', 'profilePic'])
+        .then(profile => {
+            if (profile) {
+                res.json(profile);
+            } else {
+                res.status(404).json({ message: "Profile not found" });
+            }
+        });
+}
+
+module.exports = { updateProfile, getProfile };

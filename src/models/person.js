@@ -24,7 +24,7 @@ const PersonsSchema = new Schema({
     }
 });
 
-// Removing the password form user object
+// Removing the password from user object
 
 PersonsSchema.methods.toJSON = function() {
     const user = this.toObject();
