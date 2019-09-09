@@ -5,7 +5,7 @@ const moongose = require('mongoose');
 const secret = require('../setup/db').secret;
 const Person = moongose.model('person');
 
-var opts = {}
+var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = secret;
 module.exports = passport => {

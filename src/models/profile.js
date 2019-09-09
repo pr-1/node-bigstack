@@ -8,7 +8,6 @@ const profileSchema = new Schema({
     },
     username: {
         type: String,
-        required: true,
         unique: true,
         trim: true
     },
@@ -18,7 +17,6 @@ const profileSchema = new Schema({
     },
     languages: {
         type: [String],
-        required: true
     },
     social: {
         youtube: {

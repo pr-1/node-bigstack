@@ -6,7 +6,7 @@ const personsController = require('../../controllers/auth');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.json({ auth: 'success' });
+    res.json({auth: 'success'});
 });
 
 // @METHOD: POST
@@ -25,6 +25,6 @@ router.post('/login', personsController.login);
 // @PATH: /api/auth/me
 // @DESC: get the user profile
 // @ACCESS: private
-router.get('/me', passport.authenticate('jwt', { session: false }), personsController.getProfile);
+router.get('/me', passport.authenticate('jwt', {session: false}), personsController.getProfile);
 
 module.exports = router;
