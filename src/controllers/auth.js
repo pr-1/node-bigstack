@@ -5,23 +5,6 @@ const Person = require('../models/person');
 const key = require('../setup/db').secret;
 
 const createUser = (req, res, next) => {
-    let errMsg;
-    // if (!req.body.name) {
-    //     errMsg = 'Name filed is required.';
-    // }
-    // if (!req.body.email) {
-    //     errMsg = 'Email filed is required.';
-    // }
-
-    // if (!req.body.password) {
-    //     errMsg = 'Password filed is required.';
-    // }
-    // if (errMsg) {
-    //     const error = new Error(errMsg);
-    //     error.statusCode = 400;
-    //     throw error;
-    // }
-
     Person.findOne({ email: req.body.email })
         .then((person) => {
             if (person) {
@@ -60,18 +43,6 @@ const login = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     let person;
-    let errMsg;
-    if (!email) {
-        errMsg = 'Email field is required!';
-    }
-    if (!password) {
-        errMsg = 'Password field is required!';
-    }
-    if (errMsg) {
-        const err = new Error(errMsg);
-        err.statusCode = 400;
-        next(err);
-    }
 
     Person.findOne({ email })
         .then(p => {
