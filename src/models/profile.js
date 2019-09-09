@@ -22,13 +22,19 @@ const profileSchema = new Schema({
     },
     social: {
         youtube: {
-            type: String
+            type: String,
+            trim: true,
+            lowercase: true
         },
         facebook: {
-            type: String
+            type: String,
+            trim: true,
+            lowercase: true
         },
         instagram: {
-            type: String
+            type: String,
+            trim: true,
+            lowercase: true
         }
     },
     workrole: [
