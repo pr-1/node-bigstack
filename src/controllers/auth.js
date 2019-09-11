@@ -2,10 +2,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Person = require('../models/person');
-const key = require('../setup/db').secret;
+const key = require('../config/setup/db').secret;
 
 const createUser = (req, res, next) => {
-    Person.findOne({email: req.body.email})
+    Person.findOne({ email: req.body.email })
         .then((person) => {
             if (person) {
                 const error = new Error('User already exists!');
@@ -33,18 +33,18 @@ const createUser = (req, res, next) => {
             }
         })
         .catch(err => {
-            console.log("Error occured!")
+            console.log("Error occured!");
             next(err);
         });
 
-}
+};
 
 const login = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     let person;
 
-    Person.findOne({email})
+    Person.findOne({ email })
         .then(p => {
             person = p;
             if (!p) {
@@ -63,7 +63,7 @@ const login = (req, res, next) => {
                 throw error;
             } else {
                 const token = jwt.sign(
-                    {email: person.email, name: person.name, id: person._id},
+                    { email: person.email, name: person.name, id: person._id },
                     key
                 );
                 res.status(201).json({
@@ -78,7 +78,7 @@ const login = (req, res, next) => {
             console.log('Error occuures');
             next(err);
         });
-}
+};
 
 const getProfile = (req, res) => {
     res.json({
@@ -86,6 +86,6 @@ const getProfile = (req, res) => {
         name: req.user.name,
         profileUrl: req.user.profilePic
     })
-}
+};
 
-module.exports = {createUser, login, getProfile};
+module.exports = { createUser, login, getProfile };

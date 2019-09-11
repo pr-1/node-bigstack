@@ -1,8 +1,8 @@
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const JwtStrategy = require('src/strategies/passport-jwt').Strategy;
+const ExtractJwt = require('src/strategies/passport-jwt').ExtractJwt;
 const moongose = require('mongoose');
 
-const secret = require('../setup/db').secret;
+const secret = require('../config/setup/db').secret;
 const Person = moongose.model('person');
 
 var opts = {};

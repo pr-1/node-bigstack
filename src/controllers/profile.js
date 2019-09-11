@@ -44,7 +44,7 @@ const updateProfile = (req, res, next) => {
             }
         })
         .catch(err => next(err));
-}
+};
 
 const getProfile = (req, res, next) => {
     const username = req.params.username;
@@ -82,7 +82,7 @@ const addWorkrole = (req, res, next) => {
                 to: req.body.to,
                 current: req.body.current,
                 details: req.body.details
-            }
+            };
             profile.workrole.unshift(newWork);
             profile.save()
                 .then(profile => res.json(profile))
@@ -96,7 +96,7 @@ const deleteWorkrole = (req, res, next) => {
     Profile.findOne({ user: req.user.id })
         .then(profile => {
             if (profile) {
-                profile.workrole = profile.workrole.filter(w => w.id != workroleId);
+                profile.workrole = profile.workrole.filter(w => w.id !== workroleId);
                 profile.save()
                     .then(profile => res.json(profile))
                     .catch(err => next(err));

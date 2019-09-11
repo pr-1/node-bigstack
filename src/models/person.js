@@ -30,6 +30,6 @@ PersonsSchema.methods.toJSON = function() {
     const user = this.toObject();
     delete user.password;
     return user;
-}
+};
 
 module.exports = Person = moongose.model('person', PersonsSchema);

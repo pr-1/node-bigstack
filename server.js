@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const moongose = require('mongoose');
 const passport = require('passport');
 
-const dbUrl = require('./src/setup/db').databaseUrl;
+const dbUrl = require('./src/config/setup/db').databaseUrl;
 const routes = require('./src/routes/api');
 
 const app = express();
@@ -36,7 +36,7 @@ app.use((error, req, res, next) => {
         statusCode = 500;
     }
     res.status(statusCode).json({ error: error.message });
-})
+});
 
 
 moongose.connect(dbUrl, { useNewUrlParser: true })
