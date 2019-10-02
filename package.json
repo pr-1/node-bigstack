@@ -2,7 +2,7 @@
   "name": "node-basics",
   "version": "1.0.0",
   "description": "learning node",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
